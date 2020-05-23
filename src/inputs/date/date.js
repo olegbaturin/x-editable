@@ -109,14 +109,14 @@ $(function(){
         },
 
         input2value: function() { 
-            return this.$input.data('datepicker').date;
+            return this.$input.data('datepicker').getUTCDate();
         },       
 
         activate: function() {
         },
 
         clear:  function() {
-            this.$input.data('datepicker').date = null;
+            this.$input.bdatepicker('update', '');
             this.$input.find('.active').removeClass('active');
             if(!this.options.showbuttons) {
                 this.$input.closest('form').submit(); 

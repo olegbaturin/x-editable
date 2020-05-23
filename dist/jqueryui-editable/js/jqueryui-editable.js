@@ -1,7 +1,7 @@
 /*! X-editable - v1.5.1 
 * In-place editing with Twitter Bootstrap, jQuery UI or pure jQuery
 * http://github.com/vitalets/x-editable
-* Copyright (c) 2013 Vitaliy Potapov; Licensed MIT */
+* Copyright (c) 2020 Vitaliy Potapov; Licensed MIT */
 /**
 Form with single input element, two buttons and two states: normal/loading.
 Applied as jQuery method to DIV tag (not to form tag!). This is because form can be in loading state when spinner shown.
@@ -1040,7 +1040,7 @@ Applied as jQuery method.
             .on({
                 save: $.proxy(this.save, this), //click on submit button (value changed)
                 nochange: $.proxy(function(){ this.hide('nochange'); }, this), //click on submit button (value NOT changed)                
-                cancel: $.proxy(function(){ this.hide('cancel'); }, this), //click on calcel button
+                cancel: $.proxy(function(){ this.hide('cancel'); }, this), //click on cancel button
                 show: $.proxy(function() {
                     if(this.delayedHide) {
                         this.hide(this.delayedHide.reason);
@@ -3890,9 +3890,11 @@ $(function(){
         },
         
         destroy: function() {
-            if(this.$input.data('select2')) {
-                this.$input.select2('destroy');
-            }
+	        if(this.$input) {
+	            if(this.$input.data('select2')) {
+	                this.$input.select2('destroy');
+	            }
+	        }
         }
         
     });
@@ -4418,7 +4420,7 @@ $(function(){
         //initial value, can be `new Date()`    
         value: null,                       
         minYear: 1970,
-        maxYear: 2015,
+        maxYear: (new Date().getFullYear()),
         yearDescending: true,
         minuteStep: 5,
         secondStep: 1,
@@ -4429,6 +4431,7 @@ $(function(){
     };
 
 }(window.jQuery));
+
 /**
 Combodate input - dropdown date and time picker.    
 Based on [combodate](http://vitalets.github.com/combodate) plugin (included). To use it you should manually include [momentjs](http://momentjs.com).
